@@ -1,7 +1,7 @@
 {
     "BlankStructNamesCheck": false,
     "QualifiedCheck": true,
-    "PrototypeCheck": true,
+    "PrototypeCheck": false,
     "ForceOptionalParens": true,
     "NoOCCURS": true,
     "NoSELECTAll": false,
@@ -14,7 +14,7 @@
     "PrettyComments": true,
     "UppercaseDirectives": false,
     "RequireBlankSpecial": true,
-    "RequiresProcedureDescription": true,
+    "RequiresProcedureDescription": false,
     "NoGlobalsInProcedures": true,
     "CopybookDirective": "include",
     "UselessOperationCheck": true,

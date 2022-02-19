@@ -1,12 +1,12 @@
 **FREE
 ctl-opt nomain;
 
-/include "customers_h.rpgle"
+/include "/home/CLV/customers/qrpglesrc/customersh.sqlrpgle"
 
 // ------------------------------------------------------------------------------------
-// retrieveRecordsColours
+// getNumOfCustomers - Retrieve the number of customers in table CUSTOMERS
 // ------------------------------------------------------------------------------------
-dcl-proc getNumofCustomers extproc;
+dcl-proc getNumofCustomers export;
 
     dcl-pi getNumofCustomers packed(9);
     end-pi;

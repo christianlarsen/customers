@@ -1,3 +1,2 @@
-## TEST21
-## Creating a simple subfile program using SQL
-
+## CUSTOMERS
+## Procedures and functions using table CUSTOMERS
