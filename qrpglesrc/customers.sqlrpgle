@@ -89,7 +89,6 @@ dcl-proc updateCustomer export;
     // Update data in table CUSTOMER
     exec sql
         update clv1.customers set
-            id = :customer.id,
             descrip = :customer.descrip
             where id = :customer.id;
 
