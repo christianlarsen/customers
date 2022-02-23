@@ -6,22 +6,43 @@ dcl-ds customer_t qualified template;
 end-ds;
 
 // ------------------------------------------------------------------------------------
+// Customers_IsOK - Returns if last operation was ok.
+// ------------------------------------------------------------------------------------
+dcl-pr Customers_IsOk ind extproc;
+end-pr;
+
+// ------------------------------------------------------------------------------------
 // getNumOfCustomers - Retrieve the number of customers in table CUSTOMERS
 // ------------------------------------------------------------------------------------
 dcl-pr getNumofCustomers zoned(9) extproc;
 end-pr;
 
 // ------------------------------------------------------------------------------------
-// getCustomerData - Retrieve data from CUSTOMER
+// getCustomer - Retrieve data from CUSTOMER
 // ------------------------------------------------------------------------------------
-dcl-pr getCustomerData likeds(customer_t) extproc;
+dcl-pr getCustomer likeds(customer_t) extproc;
     id like(customer_t.id) const;
 end-pr;
 
 // ------------------------------------------------------------------------------------
-// Customers_IsOK - Returns if last operation was ok.
+// insertCustomer - Insert data in table CUSTOMER
 // ------------------------------------------------------------------------------------
-dcl-pr Customers_IsOk ind extproc;
+dcl-pr insertCustomer ind extproc;
+    customer likeds(customer_t) const;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// updateCustomer - Update data in table CUSTOMER
+// ------------------------------------------------------------------------------------
+dcl-pr updateCustomer ind extproc;
+    customer likeds(customer_t) const;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// deleteCustomer - Insert data in table CUSTOMER
+// ------------------------------------------------------------------------------------
+dcl-pr deleteCustomer ind extproc;
+    id like(customer_t.id) const;
 end-pr;
 
 // ------------------------------------------------------------------------------------
@@ -41,6 +62,3 @@ end-pr;
 // ------------------------------------------------------------------------------------
 dcl-pr Customers_Close extproc;
 end-pr;
-
-
-

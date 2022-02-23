@@ -3,6 +3,18 @@ ctl-opt nomain;
 
 /include "/home/CLV/customers/qrpglesrc/customers_h.rpgle"
 
+
+// ------------------------------------------------------------------------------------
+// Customers_IsOK - Returns if last operation was ok.
+// ------------------------------------------------------------------------------------
+dcl-proc Customers_IsOk export;
+
+    dcl-pi Customers_IsOk ind end-pi;
+
+    return (sqlstate = '00000');
+
+end-proc;
+
 // ------------------------------------------------------------------------------------
 // getNumOfCustomers - Retrieve the number of customers in table CUSTOMERS
 // ------------------------------------------------------------------------------------
@@ -15,18 +27,19 @@ dcl-proc getNumofCustomers export;
 
     // Retrieving number of records in table CUSTOMERS
     exec sql
-        select count(*) into :numOfCustomers from clv1.customers;
+        select count(*) into :numOfCustomers 
+        from clv1.customers;
 
     return numOfCustomers;
 
 end-proc;
 
 // ------------------------------------------------------------------------------------
-// getCustomerData - Retrieve data from CUSTOMER
+// getCustomer - Retrieve data from CUSTOMER
 // ------------------------------------------------------------------------------------
-dcl-proc getCustomerData export;
+dcl-proc getCustomer export;
 
-    dcl-pi getCustomerData likeds(customer_t);
+    dcl-pi getCustomer likeds(customer_t);
         id like(customer_t.id) const;
     end-pi;
 
@@ -46,13 +59,59 @@ dcl-proc getCustomerData export;
 end-proc;
 
 // ------------------------------------------------------------------------------------
-// Customers_IsOK - Returns if last operation was ok.
+// insertCustomer - Insert data in table CUSTOMER
 // ------------------------------------------------------------------------------------
-dcl-proc Customers_IsOk export;
+dcl-proc insertCustomer export;
 
-    dcl-pi Customers_IsOk ind end-pi;
+    dcl-pi insertCustomer ind;
+        customer likeds(customer_t) const;
+    end-pi;
 
-    return (sqlstate = '00000');
+    // Insert data in table CUSTOMER
+    exec sql
+        insert into clv1.customers values (
+            :customer.id,
+            :customer.descrip);
+    
+    return Customers_IsOk();
+
+end-proc;
+
+// ------------------------------------------------------------------------------------
+// updateCustomer - Update data in table CUSTOMER
+// ------------------------------------------------------------------------------------
+dcl-proc updateCustomer export;
+
+    dcl-pi updateCustomer ind;
+        customer likeds(customer_t) const;
+    end-pi;
+
+    // Update data in table CUSTOMER
+    exec sql
+        update clv1.customers set
+            id = :customer.id,
+            descrip = :customer.descrip
+            where id = :customer.id;
+
+    return Customers_IsOk();
+
+end-proc;
+
+// ------------------------------------------------------------------------------------
+// deleteCustomer - Insert data in table CUSTOMER
+// ------------------------------------------------------------------------------------
+dcl-proc deleteCustomer export;
+
+    dcl-pi deleteCustomer ind;
+        id like(customer_t.id) const;
+    end-pi;
+
+    // Delete data of table CUSTOMER
+    exec sql
+        delete clv1.customers where
+            :id = id;
+    
+    return Customers_IsOk();
 
 end-proc;
 
