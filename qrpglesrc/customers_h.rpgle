@@ -25,16 +25,9 @@ dcl-pr getCustomer likeds(customer_t) extproc;
 end-pr;
 
 // ------------------------------------------------------------------------------------
-// insertCustomer - Insert data in table CUSTOMER
+// addCustomer - Insert/Update data in table CUSTOMER
 // ------------------------------------------------------------------------------------
-dcl-pr insertCustomer ind extproc;
-    customer likeds(customer_t) const;
-end-pr;
-
-// ------------------------------------------------------------------------------------
-// updateCustomer - Update data in table CUSTOMER
-// ------------------------------------------------------------------------------------
-dcl-pr updateCustomer ind extproc;
+dcl-pr addCustomer ind extproc;
     customer likeds(customer_t) const;
 end-pr;
 

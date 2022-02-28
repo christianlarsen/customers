@@ -59,38 +59,26 @@ dcl-proc getCustomer export;
 end-proc;
 
 // ------------------------------------------------------------------------------------
-// insertCustomer - Insert data in table CUSTOMER
+// addCustomer - Insert/update data in table CUSTOMER
 // ------------------------------------------------------------------------------------
-dcl-proc insertCustomer export;
+dcl-proc addCustomer export;
 
-    dcl-pi insertCustomer ind;
+    dcl-pi addCustomer ind;
         customer likeds(customer_t) const;
     end-pi;
 
-    // Insert data in table CUSTOMER
-    exec sql
-        insert into clv1.customers values (
-            :customer.id,
-            :customer.descrip);
-    
-    return Customers_IsOk();
-
-end-proc;
-
-// ------------------------------------------------------------------------------------
-// updateCustomer - Update data in table CUSTOMER
-// ------------------------------------------------------------------------------------
-dcl-proc updateCustomer export;
-
-    dcl-pi updateCustomer ind;
-        customer likeds(customer_t) const;
-    end-pi;
-
-    // Update data in table CUSTOMER
+    // First I try to update, if not, I insert new data
     exec sql
         update clv1.customers set
             descrip = :customer.descrip
-            where id = :customer.id;
+            where
+            id = :customer.id;
+    if (not Customers_IsOk());
+        exec sql
+            insert into clv1.customers values (
+                :customer.id,
+                :customer.descrip);
+    endif;
 
     return Customers_IsOk();
 
