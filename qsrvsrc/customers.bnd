@@ -1,0 +1,10 @@
+STRPGMEXP SIGNATURE('CUSTOMERS_1.0') PGMLVL(*CURRENT)
+export symbol(Customers_IsOk)
+export symbol(getNumofCustomers)
+export symbol(getCustomer)
+export symbol(addCustomer)
+export symbol(deleteCustomer)
+export symbol(Customers_Open)
+export symbol(Customers_FetchNext)
+export symbol(Customers_Close)
+ENDPGMEXP

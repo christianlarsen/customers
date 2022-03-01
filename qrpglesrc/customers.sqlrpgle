@@ -11,7 +11,7 @@ dcl-proc Customers_IsOk export;
 
     dcl-pi Customers_IsOk ind end-pi;
 
-    return (sqlstate = '00000');
+    return (sqlstate = '00000'); 
 
 end-proc;
 
@@ -44,6 +44,7 @@ dcl-proc getCustomer export;
     end-pi;
 
     dcl-ds customer likeds(customer_t);
+    dcl-s #a zoned(2);
 
     // Retrieving customer data with ID
     exec sql
@@ -53,6 +54,7 @@ dcl-proc getCustomer export;
         :customer.descrip
         from clv1.customers
         where id = :id;
+
 
     return customer;
 
