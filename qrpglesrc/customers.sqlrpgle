@@ -76,7 +76,7 @@ dcl-proc addCustomer export;
     if (not Customers_IsOk());
         exec sql
             insert into clv1.customers values (
-                :customer.id,
+                default,
                 :customer.descrip);
     endif;
 
