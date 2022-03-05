@@ -1,7 +1,7 @@
 **FREE
 
 dcl-ds customer_t qualified template;
-    id zoned(5);
+    id zoned(5) inz;
     descrip varchar(30);
 end-ds;
 
@@ -22,6 +22,12 @@ end-pr;
 // ------------------------------------------------------------------------------------
 dcl-pr getCustomer likeds(customer_t) extproc;
     id like(customer_t.id) const;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// getCustomerList - Retrieve a list of max 10000 customers
+// ------------------------------------------------------------------------------------
+dcl-pr getCustomerList likeds(customer_t) dim(10000) rtnparm extproc;
 end-pr;
 
 // ------------------------------------------------------------------------------------

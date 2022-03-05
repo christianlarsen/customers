@@ -59,6 +59,43 @@ dcl-proc getCustomer export;
 end-proc;
 
 // ------------------------------------------------------------------------------------
+// getCustomerList - Retrieve a list of max 10000 customers
+// ------------------------------------------------------------------------------------
+dcl-proc getCustomerList export;
+
+    dcl-pi getCustomerList likeds(customer_t) dim(10000) rtnparm;
+    end-pi;
+
+    dcl-ds #customerlist likeds(customer_t) dim(10000) inz(*likeds);
+    dcl-ds #customer likeds(customer_t);
+    dcl-s #z zoned(5);
+
+    clear #customerlist;
+    clear #customer;
+    #z = 0;
+
+    if (Customers_Open());
+
+        dou (not Customers_IsOk());
+
+            #customer = Customers_FetchNext();
+            if (not Customers_IsOk()) or
+                (#z > 9999);
+                leave;
+            endif;
+            #z += 1;
+            #customerlist(#z).id = #customer.id;
+            #customerlist(#z).descrip = #customer.descrip;
+        enddo;
+
+        Customers_Close();
+    endif;
+
+    return #customerlist;
+
+end-proc;
+
+// ------------------------------------------------------------------------------------
 // addCustomer - Insert/update data in table CUSTOMER
 // ------------------------------------------------------------------------------------
 dcl-proc addCustomer export;
