@@ -44,7 +44,6 @@ dcl-proc getCustomer export;
     end-pi;
 
     dcl-ds customer likeds(customer_t);
-    dcl-s #a zoned(2);
 
     // Retrieving customer data with ID
     exec sql
@@ -54,7 +53,6 @@ dcl-proc getCustomer export;
         :customer.descrip
         from clv1.customers
         where id = :id;
-
 
     return customer;
 
