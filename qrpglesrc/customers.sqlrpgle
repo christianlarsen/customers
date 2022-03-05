@@ -131,7 +131,7 @@ dcl-proc Customers_FetchNext export;
     dcl-ds customer likeds(customer_t);
 
     exec sql
-        fetch from Customers_Cur
+        fetch next from Customers_Cur
         into 
             :customer.id,
             :customer.descrip; 
