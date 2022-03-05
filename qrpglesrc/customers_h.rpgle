@@ -55,3 +55,21 @@ end-pr;
 // ------------------------------------------------------------------------------------
 dcl-pr Customers_Close extproc;
 end-pr;
+
+// ------------------------------------------------------------------------------------
+// Customers_ByName_Open - Opens Cursor to Customer Data (By Name)
+// ------------------------------------------------------------------------------------
+dcl-pr Customers_ByName_Open ind extproc;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// Customers_ByName_FetchNext - Fetch Next (By Name)
+// ------------------------------------------------------------------------------------
+dcl-pr Customers_ByName_FetchNext likeds(customer_t) extproc;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// Customers_ByName_Close - Closes Cursor (By Name)
+// ------------------------------------------------------------------------------------
+dcl-pr Customers_ByName_Close extproc;
+end-pr;
