@@ -136,7 +136,7 @@ dcl-proc Customers_FetchNext export;
         fetch from Customers_Cur
         into 
             :customer.id,
-            :customer.descrip;
+            :customer.descrip; 
 
     return customer;
 
