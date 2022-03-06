@@ -147,12 +147,13 @@ dcl-proc Customers_Open export;
     dcl-pi Customers_Open ind end-pi;
 
     exec sql
-        declare Customers_Cur cursor for
-        select id, descrip
-        from clv1.customers;
-
+        declare Customers_Cur cursor for 
+        select id, descrip from
+        clv1.customers
+        order by id;
+    
     exec sql
-        open Customers_Cur;
+        open Customers_cur;
 
     return (sqlstate = '00000');
 
