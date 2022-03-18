@@ -61,3 +61,9 @@ end-pr;
 // ------------------------------------------------------------------------------------
 dcl-pr Customers_Close extproc;
 end-pr;
+
+// ------------------------------------------------------------------------------------
+// getCustomerListJSON - Retrieve a JSON with the Customers Data
+// ------------------------------------------------------------------------------------
+dcl-pr getCustomerListJSON varchar(2000000) extproc;
+end-pr;

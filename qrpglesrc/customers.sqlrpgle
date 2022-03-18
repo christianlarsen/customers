@@ -190,3 +190,22 @@ dcl-proc Customers_Close export;
 
 end-proc;
 
+// ------------------------------------------------------------------------------------
+// getCustomerListJSON - Retrieve a JSON with the Customers Data
+// ------------------------------------------------------------------------------------
+dcl-proc getCustomerListJSON export;
+
+    dcl-pi getCustomerListJSON varchar(2000000) end-pi;
+
+    dcl-s customersJSON varchar(2000000) inz;
+    dcl-ds customers likeds(customer_t) dim(10000);
+
+    customers = getCustomerList();
+    if (Customers_IsOk());   
+        data-gen customers %data(customersJSON) %gen('YAJL/YAJLDTAGEN');
+    endif;
+    
+    return customersJSON;
+
+end-proc;
+
