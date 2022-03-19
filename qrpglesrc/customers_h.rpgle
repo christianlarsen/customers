@@ -6,7 +6,7 @@ dcl-ds customer_t qualified template;
 end-ds;
 
 dcl-ds customerList_t qualified template;
-    num_customers int(10);
+    num_customers int(10) inz;
     dcl-ds customers likeds(customer_t) dim(10000);
 end-ds;
 
