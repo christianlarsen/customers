@@ -5,11 +5,6 @@ dcl-ds customer_t qualified template;
     descrip varchar(30);
 end-ds;
 
-dcl-ds customerList_t qualified template;
-    num_customers int(10) inz;
-    dcl-ds customers likeds(customer_t) dim(10000);
-end-ds;
-
 // ------------------------------------------------------------------------------------
 // Customers_IsOK - Returns if last operation was ok.
 // ------------------------------------------------------------------------------------
@@ -32,7 +27,7 @@ end-pr;
 // ------------------------------------------------------------------------------------
 // getCustomerList - Retrieve a list of max 10000 customers
 // ------------------------------------------------------------------------------------
-dcl-pr getCustomerList likeds(customerList_t) extproc;
+dcl-pr getCustomerList likeds(customer_t) dim(10000) rtnparm extproc;
 end-pr;
 
 // ------------------------------------------------------------------------------------
@@ -65,10 +60,4 @@ end-pr;
 // Customers_Close - Closes Cursor 
 // ------------------------------------------------------------------------------------
 dcl-pr Customers_Close extproc;
-end-pr;
-
-// ------------------------------------------------------------------------------------
-// getCustomerListJSON - Retrieve a JSON with the Customers Data
-// ------------------------------------------------------------------------------------
-dcl-pr getCustomerListJSON varchar(2000000) extproc;
 end-pr;
