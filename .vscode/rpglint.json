@@ -1,6 +1,6 @@
 {
     "BlankStructNamesCheck": false,
-    "QualifiedCheck": true,
+    "QualifiedCheck": false,
     "PrototypeCheck": false,
     "ForceOptionalParens": true,
     "NoOCCURS": true,

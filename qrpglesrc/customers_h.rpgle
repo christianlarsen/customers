@@ -5,6 +5,11 @@ dcl-ds customer_t qualified template;
     descrip varchar(30);
 end-ds;
 
+dcl-ds customerList_t qualified template;
+    num_customers int(10);
+    dcl-ds customers likeds(customer_t) dim(10000);
+end-ds;
+
 // ------------------------------------------------------------------------------------
 // Customers_IsOK - Returns if last operation was ok.
 // ------------------------------------------------------------------------------------
@@ -27,7 +32,7 @@ end-pr;
 // ------------------------------------------------------------------------------------
 // getCustomerList - Retrieve a list of max 10000 customers
 // ------------------------------------------------------------------------------------
-dcl-pr getCustomerList likeds(customer_t) dim(10000) rtnparm extproc;
+dcl-pr getCustomerList likeds(customerList_t) extproc;
 end-pr;
 
 // ------------------------------------------------------------------------------------
