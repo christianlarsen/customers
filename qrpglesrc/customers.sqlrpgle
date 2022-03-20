@@ -47,12 +47,12 @@ dcl-proc getCustomer export;
 
     // Retrieving customer data with ID
     exec sql
-        select id, descrip 
+        select customer_id, customer_description
         into 
         :customer.id,
         :customer.descrip
         from clv1.customers
-        where id = :id;
+        where customer_id = :id;
 
     return customer;
 

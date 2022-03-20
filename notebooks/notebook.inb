@@ -1,1 +1,1 @@
-[{"kind":1,"language":"markdown","value":"This is my TABLE CUSTOMERS"},{"kind":2,"language":"sql","value":"select * from clv1.customers"}]
+[{"kind":1,"language":"markdown","value":"This is my TABLE CUSTOMERS"},{"kind":2,"language":"cl","value":"dspffd clv1/customers"},{"kind":2,"language":"sql","value":"select * from clv1.customers"}]
