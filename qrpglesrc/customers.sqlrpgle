@@ -63,10 +63,10 @@ end-proc;
 // ------------------------------------------------------------------------------------
 dcl-proc getCustomerList export;
 
-    dcl-pi getCustomerList likeds(customer_t) dim(10000) rtnparm;
+    dcl-pi getCustomerList likeds(customerList_t);
     end-pi;
 
-    dcl-ds #customerlist likeds(customer_t) dim(10000) inz(*likeds);
+    dcl-ds #customerlist likeds(customerList_t) inz(*likeds);
     dcl-ds #customer likeds(customer_t);
     dcl-s #z zoned(5);
 
@@ -84,8 +84,10 @@ dcl-proc getCustomerList export;
                 leave;
             endif;
             #z += 1;
-            #customerlist(#z).id = #customer.id;
-            #customerlist(#z).descrip = #customer.descrip;
+
+            #customerList.num_customers += 1;
+            #customerlist.customers(#z).id = #customer.id;
+            #customerlist.customers(#z).descrip = #customer.descrip;
         enddo;
 
         Customers_Close();
@@ -187,6 +189,27 @@ dcl-proc Customers_Close export;
 
     exec sql
         close Customers_Cur;
+
+end-proc;
+
+// ------------------------------------------------------------------------------------
+// getCustomerListJSON - Retrieve a JSON string with max 10000 customers
+// ------------------------------------------------------------------------------------
+dcl-proc getCustomerListJSON export;
+
+    dcl-pi getCustomerListJSON varchar(2000000) end-pi;
+
+    dcl-s customerListJSON varchar(2000000) inz;
+    dcl-ds customerList likeds(customerList_t) inz(*likeds);
+
+    customerList = getCustomerList();
+    if (Customers_IsOk());
+        data-gen customerList 
+            %data(customerListJSON:'countprefix=num_')
+            %gen('YAJL/YAJLDTAGEN');
+    endif;
+
+    return customerListJSON;
 
 end-proc;
 
