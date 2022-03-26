@@ -9,13 +9,6 @@ rcdfmt rcustomers;
 
 label on table clv1.customers is 'CUSTOMERS';
 
-comment on table clv1.customers is 'Any comments here...';
-
-comment on column clv1.customers (
-    id          is 'Customer ID',
-    descrip     is 'Customer description'
-);
-
 label on column clv1.customers (
     id          is 'ID',
     descrip     is 'Description'
