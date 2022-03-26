@@ -9,4 +9,5 @@ export symbol(Customers_Open)
 export symbol(Customers_FetchNext)
 export symbol(Customers_Close)
 export symbol(getCustomerListJSON)
+export symbol(getCustomerListFromJSON)
 ENDPGMEXP

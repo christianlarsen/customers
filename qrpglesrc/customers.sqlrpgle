@@ -212,3 +212,26 @@ dcl-proc getCustomerListJSON export;
     return customerListJSON;
 
 end-proc;
+
+// ------------------------------------------------------------------------------------
+// getCustomerListFromJSON - Retrieve a list of customers from a JSON string 
+// ------------------------------------------------------------------------------------
+dcl-proc getCustomerListFromJSON export;
+
+    dcl-pi getCustomerListFromJSON likeds(customerList_t);
+        customerListJSON varchar(2000000) const;
+    end-pi;
+
+    dcl-ds customerList likeds(customerList_t) inz(*likeds);
+
+    monitor;
+        data-into customerList
+            %data(customerListJSON:'countprefix=num_')
+            %parser('YAJL/YAJLINTO');
+    on-error;
+        clear customerList;
+    endmon;
+
+    return customerList;
+
+end-proc;

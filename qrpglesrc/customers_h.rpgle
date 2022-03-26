@@ -72,3 +72,10 @@ end-pr;
 // ------------------------------------------------------------------------------------
 dcl-pr getCustomerListJSON varchar(2000000) extproc;
 end-pr;
+
+// ------------------------------------------------------------------------------------
+// getCustomerListFromJSON - Retrieve a list of customers from a JSON string 
+// ------------------------------------------------------------------------------------
+dcl-pr getCustomerListFromJSON likeds(customerList_t) extproc;
+    customerListJSON varchar(2000000) const;
+end-pr;
