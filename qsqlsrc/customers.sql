@@ -11,6 +11,6 @@ label on table clv1.customers is 'CUSTOMERS';
 
 label on column clv1.customers (
     id          is 'ID',
-    descrip     is 'Description',
+    descrip     is 'Description'
 );
 
