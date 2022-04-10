@@ -3,7 +3,7 @@ BIN_LIB=CMPSYS
 LIBLIST=$(BIN_LIB) CLV1
 SHELL=/QOpenSys/usr/bin/qsh
 
-all: customers.bnd customers.sqlrpgle customers_h.rpgle
+all: customers.sql customersl1.sql customers.bnd customers.sqlrpgle customers_h.rpgle
 
 customers.sqlrpgle: customers_h.rpgle customers.bnd
 
@@ -19,3 +19,7 @@ customers.sqlrpgle: customers_h.rpgle customers.bnd
 
 %.bnd:
 	system -s "CHGATR OBJ('/home/CLV/customers/qsrvsrc/$*.bnd') ATR(*CCSID) VALUE(1252)"
+
+%.sql:
+	system -s "CHGATR OBJ('/home/CLV/customers/qsqlsrc/$*.sql') ATR(*CCSID) VALUE(1252)"
+	system -s "RUNSQLSTM SRCSTMF('/home/CLV/customers/qsqlsrc/$*.sql') COMMIT(*NONE)"
