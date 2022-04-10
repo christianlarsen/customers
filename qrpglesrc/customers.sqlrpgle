@@ -235,3 +235,55 @@ dcl-proc getCustomerListFromJSON export;
     return customerList;
 
 end-proc;
+
+// ------------------------------------------------------------------------------------
+// Customers_Orders_Open - Opens Cursor to Customer and Orders Data
+// ------------------------------------------------------------------------------------
+dcl-proc Customers_Orders_Open export;
+
+    dcl-pi Customers_Orders_Open ind end-pi;
+
+    exec sql
+        declare Customers_Orders_Cur cursor for 
+        select id, descrip, orders from
+        clv1.customers1
+        order by descrip;
+    
+    exec sql
+        open Customers_Orders_Cur;
+
+    return (sqlstate = '00000');
+
+end-proc;
+
+// ------------------------------------------------------------------------------------
+// Customers_Orders_FetchNext - Fetch Next 
+// ------------------------------------------------------------------------------------
+dcl-proc Customers_Orders_FetchNext export;
+
+    dcl-pi Customers_Orders_FetchNext likeds(customer_orders_t) end-pi;
+
+    dcl-ds customerorders likeds(customer_orders_t);
+
+    exec sql
+        fetch next from Customers_Orders_Cur
+        into 
+            :customerorders.id,
+            :customerorders.descrip,
+            :customerorders.orders; 
+
+    return customerorders;
+
+end-proc;
+
+// ------------------------------------------------------------------------------------
+// Customers_Orders_Close - Closes Cursor 
+// ------------------------------------------------------------------------------------
+dcl-proc Customers_Orders_Close export;
+
+    dcl-pi Customers_Orders_Close end-pi;
+
+    exec sql
+        close Customers_Orders_Cur;
+
+end-proc;

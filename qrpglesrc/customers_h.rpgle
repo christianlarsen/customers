@@ -5,6 +5,12 @@ dcl-ds customer_t qualified template;
     descrip varchar(30);
 end-ds;
 
+dcl-ds customer_orders_t qualified template;
+    id zoned(5) inz;
+    descrip varchar(30);
+    orders zoned(5) inz;
+end-ds;
+
 dcl-ds customerList_t qualified template;
     num_customers int(10) inz;
     dcl-ds customers likeds(customer_t) dim(10000) inz(*likeds);
@@ -78,4 +84,22 @@ end-pr;
 // ------------------------------------------------------------------------------------
 dcl-pr getCustomerListFromJSON likeds(customerList_t) extproc;
     customerListJSON varchar(2000000) const;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// Customers_Orders_Open - Opens Cursor to Customer and Orders Data
+// ------------------------------------------------------------------------------------
+dcl-pr Customers_Orders_Open ind extproc;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// Customers_Orders_FetchNext - Fetch Next 
+// ------------------------------------------------------------------------------------
+dcl-pr Customers_Orders_FetchNext likeds(customer_orders_t) extproc;
+end-pr;
+
+// ------------------------------------------------------------------------------------
+// Customers_Orders_Close - Closes Cursor 
+// ------------------------------------------------------------------------------------
+dcl-pr Customers_Orders_Close extproc;
 end-pr;
