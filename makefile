@@ -7,8 +7,6 @@ all: customers.sql customers1.sql customers.bnd customers.sqlrpgle customers_h.r
 
 customers.sqlrpgle: customers_h.rpgle customers.bnd
 
-customers1.sql: customers.sql
-
 %.sqlrpgle:
 	system -s "CHGATR OBJ('/home/CLV/customers/qrpglesrc/$*.sqlrpgle') ATR(*CCSID) VALUE(1252)"
 	liblist -a $(LIBLIST);\
