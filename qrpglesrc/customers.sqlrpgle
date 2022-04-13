@@ -247,7 +247,7 @@ dcl-proc Customers_Orders_Open export;
         declare Customers_Orders_Cur cursor for 
         select id, descrip, orders from
         clv1.customers1
-        order by descrip;
+        order by id;
     
     exec sql
         open Customers_Orders_Cur;
