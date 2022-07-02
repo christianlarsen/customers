@@ -16,6 +16,8 @@ dcl-ds customerList_t qualified template;
     dcl-ds customers likeds(customer_t) dim(10000) inz(*likeds);
 end-ds;
 
+dcl-s customerJSON_t varchar(2000000);
+
 // ------------------------------------------------------------------------------------
 // Customers_IsOK - Returns if last operation was ok.
 // ------------------------------------------------------------------------------------
@@ -76,7 +78,7 @@ end-pr;
 // ------------------------------------------------------------------------------------
 // getCustomerListJSON - Retrieve a JSON string with max 10000 customers
 // ------------------------------------------------------------------------------------
-dcl-pr getCustomerListJSON varchar(2000000) extproc;
+dcl-pr getCustomerListJSON like(customerJSON_t) extproc;
 end-pr;
 
 // ------------------------------------------------------------------------------------

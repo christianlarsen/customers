@@ -9,7 +9,7 @@ ctl-opt nomain;
 // ------------------------------------------------------------------------------------
 dcl-proc Customers_IsOk export;
 
-    dcl-pi Customers_IsOk ind end-pi;
+    dcl-pi Customers_IsOk ind end-pi; 
 
     return (sqlstate = '00000'); 
 
@@ -73,7 +73,7 @@ dcl-proc getCustomerList export;
     clear #customerlist;
     clear #customer;
     #z = 0;
-
+    
     if (Customers_Open());
 
         dou (not Customers_IsOk());
@@ -197,9 +197,9 @@ end-proc;
 // ------------------------------------------------------------------------------------
 dcl-proc getCustomerListJSON export;
 
-    dcl-pi getCustomerListJSON varchar(2000000) end-pi;
+    dcl-pi getCustomerListJSON like(customerJSON_t) end-pi;
 
-    dcl-s customerListJSON varchar(2000000) inz;
+    dcl-s customerListJSON like(customerJSON_t) inz;
     dcl-ds customerList likeds(customerList_t) inz(*likeds);
 
     customerList = getCustomerList();
